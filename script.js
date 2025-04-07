@@ -34,19 +34,26 @@ const marco = {
     isAmbassador: false,
   }
   
-  const prices = [1134, 5, 2]
+  const prices = [34, 5, 2]
   const shippingCost = 50
-  let utenteCheEffettuaLAcquisto = marco //cambia il valore qui per provare se il tuo algoritmo funziona!
+  let utenteCheEffettuaLAcquisto = amy //cambia il valore qui per provare se il tuo algoritmo funziona!
   let totCarrello = 0
   let sconto = 0
 
 
-// 1. Creare un array di utenti
-const utenti = []
+// Creare un array di utenti
+let utenti = []
 utenti.push(marco, paul, amy)
 console.log(utenti)
 
-// 2. Creare un array di ambassador
+// Calcolare il totale del carrello
+for (let i = 0; i < prices.length; i++) {
+    totCarrello += prices[i]
+}
+console.log("Totale carrello: " + totCarrello)
+
+
+// Creare un array di ambassador
 let ambassador = [] 
 for (let i = 0; i < utenti.length; i++) {
     let utente = utenti[i]
@@ -58,20 +65,26 @@ for (let i = 0; i < utenti.length; i++) {
         console.log( utente.name + " " + utente.lastName + " non è un ambassador")
     }
 }
-// 3. Calcolare il totale del carrello
-for (let i = 0; i < prices.length; i++) {
-    totCarrello += prices[i]
-}
-console.log("Totale carrello: " + totCarrello)
+// Calcolare lo sconto
 
-// 4. Calcolare lo sconto
 if (utenteCheEffettuaLAcquisto.isAmbassador) {
+    console.log(utenteCheEffettuaLAcquisto.name + " " + utenteCheEffettuaLAcquisto.lastName + " è un ambassador")
     sconto = totCarrello * 0.3
     totCarrello -= sconto
-    console.log("Carrello scontato è: " + sconto)
-}
-if (totCarrello > 100) {
+    console.log("Carrello scontato è: " + totCarrello +  " è stato applicato uno sconto del 30% pari a " + sconto) 
+
+    if (totCarrello > 100) {
     console.log("Spedizione gratuita")
-} else {
+    }   else {
     totCarrello += shippingCost
-} console.log("Totale carrello con spedizione: " + totCarrello)
+    } console.log("Totale carrello con spedizione: " + totCarrello)
+}else {
+    console.log(utenteCheEffettuaLAcquisto.name + " " + utenteCheEffettuaLAcquisto.lastName + " non è un ambassador")
+    console.log("Carrello non scontato è: " + totCarrello)
+    if (totCarrello > 100) {
+        console.log("Spedizione gratuita")
+    } else {
+        totCarrello += shippingCost
+        console.log("Totale carrello con spedizione: " + totCarrello)
+    }
+}
